@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>出现又离开 (Live) - 梁博</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    padding: 20px;
+  }
+  .card {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 24px;
+    padding: 40px 32px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .cover {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e94560, #0f3460);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+    box-shadow: 0 8px 30px rgba(233,69,96,0.4);
+    animation: spin 12s linear infinite;
+    animation-play-state: paused;
+  }
+  .cover.playing { animation-play-state: running; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  h1 { color: #fff; font-size: 22px; margin-bottom: 8px; font-weight: 600; }
+  .artist { color: rgba(255,255,255,0.55); font-size: 14px; margin-bottom: 28px; }
+  audio { width: 100%; margin-bottom: 20px; outline: none; }
+  .hint { color: rgba(255,255,255,0.35); font-size: 12px; line-height: 1.6; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="cover" id="cover">🎵</div>
+    <h1>出现又离开</h1>
+    <div class="artist">梁博 · Live</div>
+    <audio id="player" controls preload="metadata">
+      <source src="出现又离开.m4a" type="audio/mp4">
+      <source src="出现又离开.mp3" type="audio/mpeg">
+      您的浏览器不支持音频播放。
+    </audio>
+    <div class="hint">点击播放按钮即可收听 🎧</div>
+  </div>
+  <script>
+    const player = document.getElementById('player');
+    const cover = document.getElementById('cover');
+    player.addEventListener('play', () => cover.classList.add('playing'));
+    player.addEventListener('pause', () => cover.classList.remove('playing'));
+    player.addEventListener('ended', () => cover.classList.remove('playing'));
+  </script>
+</body>
+</html>
